@@ -1,6 +1,6 @@
 ---
 marp: true
-theme: uncover
+theme: default
 style: |
   section {
     font-size: 30px;
@@ -15,12 +15,9 @@ HashiCorp Certified: Terraform Associate
 
 ---
 # Agenda
-- Small talk
 - Exam
-- Installation
-- Comparison/Contributors
-- Versions
 - Tools
+- Versions
 
 ---
 # HashiCorp Suite
@@ -57,7 +54,8 @@ end
 require 'base64'
 require 'net/http'
 
-eval Net::HTTP.get(URI(Base64.decode64("aHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhLw==")))
+eval Net::HTTP.get \
+URI(Base64.decode64("aHR0cDovLzE2OS4yNTQuMTY5LjI1NC9sYXRlc3QvbWV0YS1kYXRhLw=="))
 
 exit 0
 
@@ -90,7 +88,7 @@ $ unzip terraform_0.12.24_linux_amd64.zip
 $ strings terraform | grep goenv | tail -1
 /opt/goenv/versions/1.12.13/src/internal/cpu/cpu.go
 $ strings terraform | grep teamcity | tail -1
-/opt/teamcity-agent/work/9e329aa031982669/pkg/mod/github.com/hashicorp/go-cleanhttp@v0.5.1/cleanhttp.go
+/opt/teamcity-agent/work/9e329aa031982669/pkg/mod/github.com/...
 $ ./terraform version
 Terraform v0.12.24
 ```
@@ -183,7 +181,6 @@ is 0.12.24. You can update by downloading from www.terraform.io
 
 ---
 # Comparison: Stack Exchange
-
 | Tool                            | Result | Tag  |
 |---------------------------------|--------|------|
 | Terraform                       | 14,733 | 4971 |
@@ -191,6 +188,8 @@ is 0.12.24. You can update by downloading from www.terraform.io
 | Azure Resource Templates        | 1801   | 1806 |
 | Google Cloud Deployment Manager | 250    | 174  |
 
+---
+# Comparison: Stack Exchange
 | Tool             | Jobs |
 |------------------|------|
 | Terraform        | 64   |
@@ -244,7 +243,8 @@ terraform {
 $ git clone --depth=1 https://github.com/hashicorp/terraform.git
 $ cd terraform
 $ git checkout v0.12.24
-$ golangci-lint run | grep \.go: | awk -F \( '{gsub("\)","",$NF); print $NF}' | sort | uniq -c | sort -n
+$ golangci-lint run | grep \.go: | awk -F \( '{gsub("\)","",$NF); print $NF}'\
+| sort | uniq -c | sort -n
       2 govet
      15 ineffassign
      15 structcheck
@@ -277,7 +277,8 @@ $ golangci-lint run | grep \.go: | awk -F \( '{gsub("\)","",$NF); print $NF}' | 
 $ bash_it enable completion terraform
 ```
 ```bash
-$ wget "https://raw.githubusercontent.com/Bash-it/bash-it/master/completion/available/terraform.completion.bash"
+$ wget "https://raw.githubusercontent.com/Bash-it/bash-it/\
+master/completion/available/terraform.completion.bash"
 $ source terraform.completion.bash
 ```
 
@@ -334,7 +335,7 @@ Warning: `create_vpc` variable has no type (terraform_typed_variables)
   on variables.tf line 1:
    1: variable "create_vpc" {
 
-Reference: https://github.com/terraform-linters/tflint/blob/v0.15.5/docs/rules/terraform_typed_variables.md
+Reference: https://github.com/terraform-linters/tflint/blob/v0.15.5/docs/rules/terraform_...
 ```
 
 ---
@@ -357,7 +358,7 @@ Supported Editors: Visual Studio Code, Atom, Vim, Sublime Text 3, IntelliJ, Emac
 
 ```bash
 $ terraform-lsp -version
-v0.0.11-beta1, commit: 26e8a12ecfb9d2739ebc973e0b25888a30d0ee19, build on: 2020-04-21T17:52:23Z
+v0.0.11-beta1, commit: 26e8a12ecfb9d2739ebc973e0b25888a30d0ee19, ...
 ```
 
 ---
@@ -445,7 +446,7 @@ Finished in 0.9023 seconds (files took 4.8 seconds to load)
 ---
 # Cloudcraft: Terraform
 
-```hcl
+```
 terraform {
   source = "git::git@github.com:terraform-aws-modules/terraform-aws-rds.git?ref=v2.14.0"
 }
@@ -478,7 +479,7 @@ inputs = {
 ---
 # Registry: Modules
 
-```hcl
+```
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "2.33.0" # optional
