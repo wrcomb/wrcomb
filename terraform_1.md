@@ -410,3 +410,100 @@ image_id = "ami-abc123"
 Terraform also automatically loads a number of variable definitions files if they are present:
 - Files named exactly terraform.tfvars or terraform.tfvars.json.
 - Any files with names ending in .auto.tfvars or .auto.tfvars.json.
+
+---
+# terraform show
+
+The terraform show command is used to provide human-readable output from a state or plan file
+
+Usage: `terraform show [options] [path]`
+
+```bash
+terraform show
+# aws_s3_bucket.main:
+resource "aws_s3_bucket" "main" {
+    acl                         = "private"
+    arn                         = "arn:aws:s3:::cf08973879519fa5610bc8b6ff6541"
+    bucket                      = "cf08973879519fa5610bc8b6ff6541"
+    bucket_domain_name          = "cf08973879519fa5610bc8b6ff6541.s3.amazonaws.com"
+    bucket_regional_domain_name = "cf08973879519fa5610bc8b6ff6541.s3.us-east-2.amazonaws.com"
+    force_destroy               = false
+    hosted_zone_id              = "Z2O1EMRO9K5GLX"
+    id                          = "cf08973879519fa5610bc8b6ff6541"
+    region                      = "us-east-2"
+    request_payer               = "BucketOwner"
+
+    versioning {
+        enabled    = false
+        mfa_delete = false
+    }
+}
+```
+
+---
+# terraform output
+
+The terraform output command is used to extract the value of an output variable from the state file.
+
+Usage: `terraform output [options] [NAME]`
+
+```
+output "arn" {
+  value = aws_s3_bucket.main.arn
+}
+```
+
+```bash
+$ terraform output
+arn = arn:aws:s3:::cf08973879519fa5610bc8b6ff6541
+```
+
+---
+# Built-in Functions
+
+The Terraform language includes a number of built-in functions that you can call from within expressions to transform and combine values
+
+```
+> max(-1, 4)
+4
+> file("/etc/debian_version")
+buster/sid
+> merge({"a"="1", "b"="2"}, {"c"="3", "d"="4"})
+{
+  "a" = "1"
+  "b" = "2"
+  "c" = "3"
+  "d" = "4"
+}
+> toset(["a", "b", "a"])
+[
+  "a",
+  "b",
+]
+```
+
+---
+# Simple Structure
+
+```
+├── main.tf
+├── variables.tf
+├── outputs.tf
+```
+
+- `main.tf`: contains the main set of configuration
+- `variables.tf`: contains the variable definitions
+- `outputs.tf`: contains the output definitions
+
+don't commit:
+- `terraform.tfstate` and `terraform.tfstate.backup`: contain your Terraform state
+- `.terraform`: contains the modules and plugins
+
+---
+
+# Links
+
+[Terraform Documentation](https://www.terraform.io/docs/)
+
+---
+# End

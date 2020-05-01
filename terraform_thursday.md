@@ -24,7 +24,7 @@ HashiCorp Certified: Terraform Associate
 
 ### Find the odd one
 
-![height:300px](images/hashicorp_suite.webp)
+![height:300px](images/terarform_hashicorp_suite.webp)
 
 ---
 # HashiCorp Suite
@@ -342,14 +342,14 @@ Reference: https://github.com/terraform-linters/tflint/blob/v0.15.5/docs/rules/t
 # IDEA: HashiCorp Terraform / HCL language support
 
 09.10.2019
-![height:450px](images/idea_terraform.png)
+![height:450px](images/terarform_idea.png)
 
 ---
 # Visual Studio Code: 4ops.terraform
 
 31.12.2019
 Too simple
-![height:450px](images/vscode_4ops.png)
+![height:450px](images/terarform_vscode_4ops.png)
 
 ---
 # terraform-lsp
@@ -380,7 +380,7 @@ tfschema resource show aws_lambda_function
 # Visual Studio Code: mauve.terraform
 
 25.08.2019
-![height:450px](images/vscode_mauve.png)
+![height:450px](images/terarform_vscode_mauve.png)
 
 ---
 # Visual Studio Code: mauve.terraform
@@ -439,9 +439,14 @@ Finished in 0.9023 seconds (files took 4.8 seconds to load)
 - Terratest(testify for infrastructure)
 
 ---
+# Blast Radius
+
+![height:450px](images/terarform_blast_radius.png)
+
+---
 # Cloudcraft: Overview
 
-![height:450px](images/Cloudcraft.png)
+![height:450px](images/terarform_Cloudcraft.png)
 
 ---
 # Cloudcraft: Terraform
@@ -469,12 +474,12 @@ inputs = {
 # Registry: Providers
 
 - Third-party providers must be manually installed
-![height:400px](images/registry_providers.png)
+![height:400px](images/terarform_registry_providers.png)
 
 ---
 # Registry: Modules
 
-![height:500px](images/registry_modules.png)
+![height:500px](images/terarform_registry_modules.png)
 
 ---
 # Registry: Modules
