@@ -34,16 +34,16 @@ HashiCorp Certified: Terraform Associate
 Treat infrastructure like software. Provisioning infrastructure through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools.
 
 Added value and advantages:
-- cost (reduction)
-- speed (faster execution)
-- risk (remove errors and security violations)
+- Cost (reduction)
+- Speed (faster execution)
+- Risk (remove errors and security violations)
 
 ----
 # Infrastructure as code
 
-- version control system
-- testing
-- pull requests
+- Version control system(collaboration)
+- Testing
+- Pull requests
 - DRY
 
 ----

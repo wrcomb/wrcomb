@@ -439,6 +439,48 @@ Finished in 0.9023 seconds (files took 4.8 seconds to load)
 - Terratest(testify for infrastructure)
 
 ---
+# Terraformer
+
+A CLI tool that generates tf/json and tfstate files based on existing infrastructure (reverse Terraform)
+
+```
+$ terraformer import aws --resources=vpc,subnet
+2020/05/02 20:56:49 aws importing default region
+2020/05/02 20:56:49 aws importing... vpc
+2020/05/02 20:56:56 Refreshing state... aws_vpc.tfer--vpc-002D-505d8d3b
+2020/05/02 20:57:05 aws importing... subnet
+2020/05/02 20:57:12 Refreshing state... aws_subnet.tfer--subnet-002D-d1bc47ba
+2020/05/02 20:57:12 Refreshing state... aws_subnet.tfer--subnet-002D-0e487974
+2020/05/02 20:57:12 Refreshing state... aws_subnet.tfer--subnet-002D-46a0390a
+2020/05/02 20:57:19 aws Connecting.... 
+2020/05/02 20:57:19 aws save vpc
+2020/05/02 20:57:19 aws save tfstate for vpc
+2020/05/02 20:57:19 aws save subnet
+2020/05/02 20:57:19 aws save tfstate for subnet
+```
+
+---
+# Terraformer
+
+```
+$ cat generated/aws/subnet/variables.tf 
+data "terraform_remote_state" "vpc" {
+  backend = "local"
+
+  config = {
+    path = "../../../generated/aws/vpc/terraform.tfstate"
+  }
+}
+$ cat generated/aws/subnet/subnet.tf 
+resource "aws_subnet" "tfer--subnet-002D-0e487974" {
+  assign_ipv6_address_on_creation = "false"
+  cidr_block                      = "172.31.16.0/20"
+  map_public_ip_on_launch         = "true"
+  vpc_id                          = "${data.terraform_remote_state.vpc.outputs.aws_vpc_tfer--vpc-002D-505d8d3b_id}"
+}
+```
+
+---
 # Blast Radius
 
 ![height:450px](images/terarform_blast_radius.png)
