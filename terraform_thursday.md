@@ -17,14 +17,13 @@ HashiCorp Certified: Terraform Associate
 # Agenda
 - Exam
 - Tools
-- Versions
 
 ---
 # HashiCorp Suite
 
 ### Find the odd one
 
-![height:300px](images/terarform_hashicorp_suite.webp)
+![height:300px](images/terraform_hashicorp_suite.webp)
 
 ---
 # HashiCorp Suite
@@ -50,6 +49,9 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/8"
 end
 ```
+```
+Vagrant.configure("2") {|vasya| vasya.vm.box = "centos/8"}
+```
 ```ruby
 require 'base64'
 require 'net/http'
@@ -63,7 +65,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "centos/8"
 end
 ```
-
+ 
 ---
 # HashiCorp Associate Certification
 
@@ -75,9 +77,10 @@ end
 ---
 # go
 
-- Knowledge of the Go language is not required, but it’s better to able for reading provider code
-- Provider code is a very subtle layer for cloud or service API
-- Providers themselves are executable files that communicate with TF via gRPC
+- Knowledge of the Go language is not required, but it’s better to able for reading provider code.
+- Provider code is a very subtle layer for cloud or service API.
+- Providers themselves are executable files that communicate with TF via gRPC.
+- Each Resource implements CREATE, READ, UPDATE, and DELETE (CRUD) methods to manage itself, while Terraform Core manages a Resource Graph of all the resources declared in the configuration as well as their current state.
 
 ---
 # Installation: binary
@@ -342,14 +345,14 @@ Reference: https://github.com/terraform-linters/tflint/blob/v0.15.5/docs/rules/t
 # IDEA: HashiCorp Terraform / HCL language support
 
 09.10.2019
-![height:450px](images/terarform_idea.png)
+![height:450px](images/terraform_idea.png)
 
 ---
 # Visual Studio Code: 4ops.terraform
 
 31.12.2019
 Too simple
-![height:450px](images/terarform_vscode_4ops.png)
+![height:450px](images/terraform_vscode_4ops.png)
 
 ---
 # terraform-lsp
@@ -380,7 +383,7 @@ tfschema resource show aws_lambda_function
 # Visual Studio Code: mauve.terraform
 
 25.08.2019
-![height:450px](images/terarform_vscode_mauve.png)
+![height:450px](images/terraform_vscode_mauve.png)
 
 ---
 # Visual Studio Code: mauve.terraform
@@ -405,7 +408,7 @@ source 'https://rubygems.org'
 gem 'awspec'
 $ bundle install 
 $ awspec init
-$ cat
+$ cat spec/ec2_spec.rb
 require 'spec_helper'
 
 describe ec2('i-0f74ebda72dc44f5c') do
@@ -483,12 +486,12 @@ resource "aws_subnet" "tfer--subnet-002D-0e487974" {
 ---
 # Blast Radius
 
-![height:450px](images/terarform_blast_radius.png)
+![height:450px](images/terraform_blast_radius.png)
 
 ---
 # Cloudcraft: Overview
 
-![height:450px](images/terarform_Cloudcraft.png)
+![height:450px](images/terraform_Cloudcraft.png)
 
 ---
 # Cloudcraft: Terraform
@@ -516,12 +519,21 @@ inputs = {
 # Registry: Providers
 
 - Third-party providers must be manually installed
-![height:400px](images/terarform_registry_providers.png)
+![height:400px](images/terraform_registry_providers.png)
 
 ---
 # Registry: Modules
 
-![height:500px](images/terarform_registry_modules.png)
+![height:500px](images/terraform_registry_modules.png)
+
+---
+# Registry: Requirements
+
+- **GitHub**. The module must be on GitHub and must be a public repo
+- **Named** `terraform-<PROVIDER>-<NAME>`
+- **Repository** description
+- **Standard** module structure. The module must adhere to the standard module structure
+- **x.y.z** tags for releases
 
 ---
 # Registry: Modules
