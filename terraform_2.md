@@ -72,6 +72,33 @@ $ echo $?
 ```
 
 ---
+# Imperative Approach: example
+```bash
+output=$($AWS s3api get-bucket-versioning --bucket $dst| jq '(.Status="Enabled")|.Status')
+if [[ $output != \"Enabled\" ]]
+then
+        echo "Enabling versioning for $dst"
+        $AWS s3api put-bucket-versioning --bucket $dst --versioning-configuration Status=Enabled
+        [[ $? -ne 0 ]] && { echo "Can't enable versioning for $dst"; exit 1; }
+fi
+
+$AWS s3api get-bucket-encryption --bucket ${dst} &>/dev/null
+if [[ $? -ne 0 ]]
+then
+        if [[ -z ${key_arn} ]]
+        then
+                cmk_id=$($AWS kms create-key --origin EXTERNAL --region eu-central-1|jq '.KeyMetadata.KeyId'|tr -d \")
+        [[ $? -ne 0 ]] && { echo "Can't create key"; exit 1; }
+                key_arn="arn:aws:kms:eu-central-1:${id}:key/${cmk_id}"
+                $AWS kms get-parameters-for-import --key-id ${cmk_id} \
+                        --wrapping-algorithm RSAES_OAEP_SHA_1 \
+                        --wrapping-key-spec RSA_2048 --region eu-central-1 >/tmp/get-parameters-for-import
+                [[ $? -ne 0 ]] && { echo "Can't download key"; exit 1; }
+                cat /tmp/get-parameters-for-import | jq .PublicKey | cut -f 2 -d \" > PublicKey.b64
+                openssl enc -d -base64 -A -in PublicKey.b64 -out PublicKey.bin
+```
+
+---
 # Declarative Approach
 
 The declarative approach focuses on what the eventual target configuration should be:
@@ -488,7 +515,7 @@ module "vpc" {
 ---
 # Registry: Modules
 
-![height:500px](images/terarform_registry_modules.png)
+![height:500px](images/terraform_registry_modules.png)
 
 ---
 # Registry: Requirements
@@ -509,6 +536,10 @@ Usage: `terraform state <subcommand> [options] [args]`
 - `terraform state list` command is used to list resources within a Terraform state
 - `terraform state mv` command is used to move items in a Terraform state
 - `terraform state pull` command is used to manually download and output the state from remote state
+...
+
+---
+# terraform: state
 - `terraform state push` command is used to manually upload a local state file to remote state
 - `terraform state rm` command is used to remove items from the Terraform state
 - `terraform state show` command is used to show the attributes of a single resource in the Terraform state

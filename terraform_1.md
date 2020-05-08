@@ -512,7 +512,6 @@ The `terraform fmt` command is used to rewrite Terraform configuration files to 
 Usage: `terraform fmt [options] [DIR]`
 
 ---
-
 # Links
 
 [Terraform Documentation](https://www.terraform.io/docs/)

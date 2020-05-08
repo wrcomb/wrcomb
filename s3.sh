@@ -159,8 +159,8 @@ then
         exit 1
 fi
 
-output=$($AWS s3api get-bucket-versioning --bucket $src| jq '(.Status="Enabled")|.Status')
-if [[ $output != \"Enabled\" ]]
+output=$($AWS s3api get-bucket-versioning --bucket $src| jq '(.Status=="Enabled")')
+if [[ $output != true ]]
 then
         echo "Enabling versioning for $src"
         $AWS s3api put-bucket-versioning --bucket $src --versioning-configuration Status=Enabled
@@ -175,8 +175,8 @@ then
         [[ $? -ne 0 ]] && { echo "Can't create the bucket:${dst}"; exit 1; }
 fi
 
-output=$($AWS s3api get-bucket-versioning --bucket $dst| jq '(.Status="Enabled")|.Status')
-if [[ $output != \"Enabled\" ]]
+output=$($AWS s3api get-bucket-versioning --bucket $dst| jq '(.Status=="Enabled")')
+if [[ $output != true ]]
 then
         echo "Enabling versioning for $dst"
         $AWS s3api put-bucket-versioning --bucket $dst --versioning-configuration Status=Enabled

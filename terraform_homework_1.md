@@ -47,7 +47,7 @@ Deploy nginx and php containers
 - Copy `index.php` inside root for PHP
 
 ---
-# Task 1: Acceptance criteria
+# Task 1: Acceptance criterias
 
 - URL in output
 - phpinfo() into the URL
@@ -55,7 +55,7 @@ Deploy nginx and php containers
 ---
 # Task 2: AWS Lambdas
 
-Deploy nginx and php containers
+Deploy lambda(s) to stop/start EC2 instances
 ![height:400px](images/terraform_homework_2.png)
 
 ---
@@ -69,7 +69,7 @@ AWS Lambdas:
 ---
 # Task 2: AWS Lambdas
 
-- Define three input variables:
+- Define input variables:
   - memory size
   - timeout
   - runtime
@@ -87,9 +87,17 @@ AWS Lambdas:
   - Permissions for lambdas
 
 ---
-# Task 2: AWS Lambdas
+# Task 2: Acceptance criterias
 
 - Modify input variables to stop in the middle of the hour
 - Modify input variables to tart at the beginning of the hour
-- Create a test instance with a tag
-- Add CloudWatch logs into README.md
+- Create a test instance with `test` tag
+- Add your CloudWatch logs into `README.md`
+
+---
+# Links
+
+[example](https://github.com/wrcomb/wrcomb/tree/master/school_terraform_homework)
+
+---
+# End
