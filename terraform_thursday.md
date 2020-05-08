@@ -400,6 +400,17 @@ tfschema resource show aws_lambda_function
 ```
 
 ---
+# Testing: spectrum
+
+Increasing complexity:
+
+- terraform validate (ansible-playbook --syntax-check)
+- TFLint (ansible-lint)
+- awspec(integration) (molecule verify) or kitchen-terraform + kitchen-verifier-awspec(molecule test)
+- terraform plan(against prod) (ansible-playbook --check)
+- terraform apply (against prod)
+
+---
 # Testing: awspec
 
 ```bash

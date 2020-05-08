@@ -6,7 +6,7 @@ style: |
     font-size: 30px;
   }
 ---
-# Terraform: Infrastructure as code
+# Terraform: Infrastructure as Code 1
 
 ### Aleksandr Usov
 
@@ -18,7 +18,6 @@ HashiCorp Certified: Terraform Associate
 
 - Infrastructure as code
 - Terraform configuration
-- Terraform settings
 
 ---
 # Evolution of Management
@@ -114,6 +113,15 @@ The key features of Terraform are:
 **Change Automation**: Complex changesets can be applied to your infrastructure with minimal human interaction.
 
 ---
+# Terraform: Multi-Cloud
+
+One workflow to provision multi-vendor infrastructure.
+
+200+ available providers for a broad set of common infrastructure. Provider SDK makes it simple to create new and custom providers.
+
+Use best of features from different providers and compose them in a single logical topology.
+
+---
 # Terraform 
 
 |Open Source|Terraform Cloud|Terraform Enterprise|
@@ -129,9 +137,10 @@ The key features of Terraform are:
 ---
 # go
 
-- Knowledge of the Go language is not required, but it’s better to able for reading provider code
-- Provider code is a very subtle layer for cloud or service API
-- Providers themselves are executable files that communicate with TF via gRPC
+- Knowledge of the Go language is not required, but it’s better to able for reading provider code.
+- Provider code is a very subtle layer for cloud or service API.
+- Providers themselves are executable files that communicate with TF via gRPC.
+- Each Resource implements CREATE, READ, UPDATE, and DELETE (CRUD) methods to manage itself, while Terraform Core manages a Resource Graph of all the resources declared in the configuration as well as their current state.
 
 ---
 # Installation: binary
@@ -139,10 +148,6 @@ The key features of Terraform are:
 ```bash
 $ wget 'https://releases.hashicorp.com/terraform/0.12.24/terraform_0.12.24_linux_amd64.zip'
 $ unzip terraform_0.12.24_linux_amd64.zip 
-$ strings terraform | grep goenv | tail -1
-/opt/goenv/versions/1.12.13/src/internal/cpu/cpu.go
-$ strings terraform | grep teamcity | tail -1
-/opt/teamcity-agent/work/9e329aa031982669/pkg/mod/github.com/...
 $ ./terraform version
 Terraform v0.12.24
 ```
@@ -498,6 +503,13 @@ buster/sid
 don't commit:
 - `terraform.tfstate` and `terraform.tfstate.backup`: contain your Terraform state
 - `.terraform`: contains the modules and plugins
+
+---
+# terraform: fmt
+
+The `terraform fmt` command is used to rewrite Terraform configuration files to a canonical format and style.
+
+Usage: `terraform fmt [options] [DIR]`
 
 ---
 
