@@ -1,3 +1,3 @@
-provider "docker" {}
+provider "aws" {}
 
 # put resources here
