@@ -188,30 +188,30 @@ if [[ $? -ne 0 ]]
 then
         if [[ -z ${key_arn} ]]
         then
-                cmk_id=$($AWS kms create-key --origin EXTERNAL --region eu-central-1|jq '.KeyMetadata.KeyId'|tr -d \")
-        [[ $? -ne 0 ]] && { echo "Can't create key"; exit 1; }
-                key_arn="arn:aws:kms:eu-central-1:${id}:key/${cmk_id}"
-                $AWS kms get-parameters-for-import --key-id ${cmk_id} \
-                        --wrapping-algorithm RSAES_OAEP_SHA_1 \
-                        --wrapping-key-spec RSA_2048 --region eu-central-1 >/tmp/get-parameters-for-import
-                [[ $? -ne 0 ]] && { echo "Can't download key"; exit 1; }
-                cat /tmp/get-parameters-for-import | jq .PublicKey | cut -f 2 -d \" > PublicKey.b64
-                openssl enc -d -base64 -A -in PublicKey.b64 -out PublicKey.bin
-                openssl rand -out PlaintextKeyMaterial.bin 32
-                openssl rsautl -encrypt \
-                        -in PlaintextKeyMaterial.bin \
-                        -oaep \
-                        -inkey PublicKey.bin \
-                        -keyform DER \
-                        -pubin \
-                        -out EncryptedKeyMaterial.bin
-                cat /tmp/get-parameters-for-import | jq .ImportToken | cut -f 2 -d \" > ImportToken.b64
-                openssl enc -d -base64 -A -in ImportToken.b64 -out ImportToken.bin
-                $AWS kms import-key-material --key-id ${cmk_id} \
-                        --encrypted-key-material fileb://EncryptedKeyMaterial.bin \
-                        --import-token fileb://ImportToken.bin \
-                        --expiration-model KEY_MATERIAL_DOES_NOT_EXPIRE --region eu-central-1
-                [[ $? -ne 0 ]] && { echo "Can't import key"; exit 1; }
+               cmk_id=$($AWS kms create-key --origin EXTERNAL --region eu-central-1|jq '.KeyMetadata.KeyId'|tr -d \")
+               [[ $? -ne 0 ]] && { echo "Can't create key"; exit 1; }
+               key_arn="arn:aws:kms:eu-central-1:${id}:key/${cmk_id}"
+               $AWS kms get-parameters-for-import --key-id ${cmk_id} \
+                     --wrapping-algorithm RSAES_OAEP_SHA_1 \
+                     --wrapping-key-spec RSA_2048 --region eu-central-1 >/tmp/get-parameters-for-import
+               [[ $? -ne 0 ]] && { echo "Can't download key"; exit 1; }
+               cat /tmp/get-parameters-for-import | jq .PublicKey | cut -f 2 -d \" > PublicKey.b64
+               openssl enc -d -base64 -A -in PublicKey.b64 -out PublicKey.bin
+               openssl rand -out PlaintextKeyMaterial.bin 32
+               openssl rsautl -encrypt \
+                  -in PlaintextKeyMaterial.bin \
+                  -oaep \
+                  -inkey PublicKey.bin \
+                  -keyform DER \
+                  -pubin \
+                  -out EncryptedKeyMaterial.bin
+               cat /tmp/get-parameters-for-import | jq .ImportToken | cut -f 2 -d \" > ImportToken.b64
+               openssl enc -d -base64 -A -in ImportToken.b64 -out ImportToken.bin
+               $AWS kms import-key-material --key-id ${cmk_id} \
+                  --encrypted-key-material fileb://EncryptedKeyMaterial.bin \
+                  --import-token fileb://ImportToken.bin \
+                  --expiration-model KEY_MATERIAL_DOES_NOT_EXPIRE --region eu-central-1
+               [[ $? -ne 0 ]] && { echo "Can't import key"; exit 1; }
         fi
         $AWS s3api put-bucket-encryption \
                 --bucket snap-drc-prod-bucket \
