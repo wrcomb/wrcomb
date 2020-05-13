@@ -90,7 +90,7 @@ AWS Lambdas:
 # Task 2: Acceptance criterias
 
 - Modify input variables to stop in the middle of the hour
-- Modify input variables to tart at the beginning of the hour
+- Modify input variables to start at the beginning of the hour
 - Create a test instance with `test` tag
 - Add your CloudWatch logs into `README.md`
 

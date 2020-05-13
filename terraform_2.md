@@ -460,6 +460,70 @@ $ tree minimal-module/
 - `outputs.tf` will contain the output definitions for your module.
 
 ---
+# Modules: nested
+
+```
+$ tree complete-module/
+.
+├── README.md
+├── main.tf
+├── variables.tf
+├── outputs.tf
+├── ...
+├── modules/
+│   ├── nestedA/
+│   │   ├── README.md
+│   │   ├── variables.tf
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   ├── nestedB/
+│   ├── .../
+```
+
+---
+# Modules: Local
+
+```
+module "consul" {
+  source = "./consul"
+}
+```
+
+---
+# Modules: Registry
+
+Registry source address: `<NAMESPACE>/<NAME>/<PROVIDER>`
+
+```
+module "consul" {
+  source = "hashicorp/consul/aws"
+  version = "0.1.0"
+}
+```
+
+---
+# Modules: GitHub
+
+```
+module "consul" {
+  source = "github.com/hashicorp/example"
+}
+```
+
+---
+# Modules: Git
+
+```
+module "vpc" {
+  source = "git::https://example.com/vpc.git"
+}
+
+module "storage" {
+  source = "git::ssh://username@example.com/storage.git"
+}
+```
+
+---
 # terraform-aws-modules
 
 terraform-aws-modules/terraform-aws-vpc/main.tf:
